@@ -1,0 +1,66 @@
+.loginForm{
+    height: 520px;
+    width: 400px;
+    background-color: rgba(255,255,255,0.13);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 3rem 35px;
+}
+
+.formInput{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-weight: 300;
+    outline: none;
+    transition: .4s ease outline;
+}
+.formInput:focus{
+    border: none;
+    outline: 1px solid #757575;
+}
+.formInput::placeholder{
+    color: #b6b6b6;
+}
+.formButton{
+    margin-top: 50px;
+    width: 100%;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .4s ease;
+}
+
+.navigateLink{
+    width: 100%;
+    text-align: center;
+    margin-top: 16px;
+    color: #a9a9a9;
+}
+
+.navigateLink:hover{
+    color: #dcdcdc;
+    text-decoration: underline;
+}
+
+.disabledButton{
+    background-color: rgb(255, 255, 255, 0.2);
+    border: 1px solid gray;
+    color: gray;
+}
