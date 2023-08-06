@@ -40,6 +40,7 @@ const Login = () => {
             setIsSubmitting(true);
             const response: ISuccessResponse = await axios.post('/api/users/login', formData);
             toast.success(response?.message || 'Login successful');
+            router.push('/profile');
         } catch (error: any) {
             console.log("Error login", error.message);
             toast.error('Could not login!');
