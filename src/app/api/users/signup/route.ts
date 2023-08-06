@@ -3,6 +3,7 @@ import bcryptjs from 'bcryptjs';
 
 import { connect } from "@db/config"
 import User from "@db/models/user";
+import { sendMail } from "@helpers/mailer";
 
 connect();
 
@@ -11,11 +12,9 @@ export async function POST( request: NextRequest ) {
         const requestBody = await request.json();
         const { username, password, email } = requestBody;
 
-        console.log({requestBody});
-
         //check if user already exists with the email
-        const exisitngUser = await User.findOne({email});
-        if(exisitngUser) {
+        const existingUser = await User.findOne({email});
+        if(existingUser) {
             return NextResponse.json({error: 'User already exisits with that email!'}, {status: 400});
         }
 
@@ -28,9 +27,14 @@ export async function POST( request: NextRequest ) {
         });
 
         const savedUser = await newUser.save();
-        console.log({savedUser});
 
         //send email
+        sendMail({
+            recipient: savedUser.email,
+            emailType: "ACCOUNT_VERIFICATION",
+            userId: newUser._id,
+            subject: "Please verify you email",
+        });
         
         return NextResponse.json({
             message: "Successfully created the user",
@@ -39,8 +43,6 @@ export async function POST( request: NextRequest ) {
         })
 
     } catch (error) {
-        console.log("error signup")
-        console.log(error);
         return NextResponse.json({error}, {status: 500});
     }
 } 

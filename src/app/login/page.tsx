@@ -84,7 +84,7 @@ const Login = () => {
                     {
                         isSubmitting ? (
                             <Loader 
-                                color='#fff'
+                                color='#000'
                             />
                         ) : <span>Login</span>
                     }

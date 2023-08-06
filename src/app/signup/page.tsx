@@ -34,7 +34,6 @@ const SignUp = () => {
         try{
             setIsSubmitting(true);
             const response = await axios.post('/api/users/signup', formData);
-            console.log("Signup successfull", response);
             router.push('/login')
         } catch(error: any) {
             console.log("Signup failed -", error.message);
@@ -87,7 +86,7 @@ const SignUp = () => {
                     {
                         isSubmitting ? (
                             <Loader 
-                                color='#fff'
+                                color='#000'
                             />
                         ) : <span>Sign up</span>
                     }
