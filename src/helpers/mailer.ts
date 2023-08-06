@@ -41,13 +41,21 @@ export const sendMail = async ({
                 pass: process.env.MAILER_SECRET,
             }
         });
+
+        let actionLink = "";
+
+        if(emailType === "ACCOUNT_VERIFICATION") {
+            actionLink = `${process.env.DOMAIN}/verifyemail?token=${hashedToken}"`
+        } else if(emailType === "FORGOT_PASSWORD") {
+            actionLink = `${process.env.DOMAIN}/resetpassword?token=${hashedToken}"`
+        }
     
         const mailOptions: SendMailOptions = {
             from: process.env.MAILER_USERNAME,
             to: recipient,
             subject,
-            html: `<p>Click <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}">here</a> to ${emailType === "ACCOUNT_VERIFICATION" ? "verify your email" : "reset your password"}
-            or copy and paste the link below in your browser. <br> ${process.env.DOMAIN}/verifyemail?token=${hashedToken}
+            html: `<p>Click <a href="${actionLink}">here</a> to ${emailType === "ACCOUNT_VERIFICATION" ? "verify your email" : "reset your password"}
+            or copy and paste the link below in your browser. <br> ${actionLink}
             </p>`
         }
         const response = await transporter.sendMail(mailOptions);
